@@ -11,3 +11,20 @@
   **./move.py** \<networkID> \<target_TemplateID>  \<destination_OrgID>-   This moves a network from one template, into another template. Preserving all settings. (MX/MS/MR/MV/MG) **NOW SUPPORTS CROSS-ORG and NAMED SEARCH**
   
     **Named example:** ./move.py "Test Network" "Template-A" "ProductionORG_1"
+
+  **./move_switch.py** \<networkID or name> \<target_TemplateID or name> \<destination_OrgID or name optional> - Moves a switch network to a destination switch template by:
+  1. Unbinding with `retainConfigs=True` (keeps current config)
+  2. Binding to target template with `autoBind=True` by default (rebinds switches to matching switch profiles by model)
+  3. Capturing switch port config snapshots before/after each network move and printing ASCII diff tables
+  4. Reporting per-network and average success-rate percentages for port/settings parity
+  
+  Use `--all-in-template` to move **all switch networks bound to the source network's current template**.
+  Dry-run is the default mode. Use `--execute` to make changes.
+
+    **Example:** ./move_switch.py "Branch-001" "Switch-Template-New" "Production ORG"
+  
+  **./move_menu.py** - Text menu wrapper for `move_switch.py`:
+  1. Select organization
+  2. Select currently bound switch network in that org, or `[ALL NETWORKS]` then choose source template (`--all-in-template` mode)
+  3. Select destination switch template
+  4. Optional prompts for `autoBind` and execution mode (dry-run default)
