@@ -22,6 +22,9 @@
   Dry-run is the default mode. Use `--execute` to make changes.
 
     **Example:** ./move_switch.py "Branch-001" "Switch-Template-New" "Production ORG"
+
+  **Run first:** `./create_keys.py`  
+  This stores/caches your Meraki API key locally so future commands (including `move_menu.py`) do not require manual API key entry each run.
   
   **./move_menu.py** - Text menu wrapper for `move_switch.py`:
   1. Select organization
